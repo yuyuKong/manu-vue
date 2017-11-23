@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        text-decoration: none;
+    }
+    ul{
+        width: 200px;
+        height: auto;
+        margin: 200px;
+    }
+    ul>li{
+        width: 100%;
+        height: auto;
+        border-bottom:1px solid #97ccc3;
+        background-image: -webkit-linear-gradient(top, #91eee9, #c1b1cc);
+        border-radius: 5px;
+    }
+    ul>li>h5{
+        background: #7cd5ee;
+        font-size: 20px;
+        color: #ffffff;
+        line-height: 50px;
+        text-align: center;
+        font-weight: 500;
+        cursor: default;
+        margin: 5px;
+    }
+    ul>li>a{
+        display: block;
+        font-size: 16px;
+        color: #ffffff;
+        line-height: 30px;
+        text-align: center;
+        border-radius: 5px;
+        margin: 5px;
+    }
+    ul>li>a:hover{
+        background: #75ceee;
+
+    }
+</style>
+<body>
+<div class="manu">
+    <custom-manu></custom-manu>
+</div>
+<script>
+    Vue.component("custom-manu",{
+        template:`
+            <ul>
+                <li v-for="parent in con">
+                    <h5 @click="toggle(parent)">{{parent.title}}</h5>
+                    <a href='' v-for="son in parent.son" v-show="parent.state">{{son.title}}</a>
+                </li>
+            </ul>
+        `,
+        data:function (){
+            return {
+                con:[{title:"前端工作室",state:false,son:[{title:"html"},{title:"css"},{title:"js"},{title:"nodejs"},{title:"vue"}]},{title:"后台攻城狮",state:false,son:[{title:"php"},{title:"java"},{title:"mysql"},{title:"c"},{title:"c++"}]},{title:"后台攻城狮",state:false,son:[{title:"php"},{title:"java"},{title:"mysql"},{title:"c"},{title:"c++"}]},{title:"后台攻城狮",state:false,son:[{title:"php"},{title:"java"},{title:"mysql"},{title:"c"},{title:"c++"}]}]
+            }
+        },
+        methods:{
+            toggle(parent){
+                parent.state = !parent.state;
+            }
+        }
+    })
+    new Vue({
+        el:'.manu',
+        data:{}
+    })
+</script>
+
+</body>
+</html>
