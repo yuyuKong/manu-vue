@@ -37,7 +37,7 @@
         cursor: default;
         margin: 5px;
     }
-    ul>li>a{
+    ul>li>div>a{
         display: block;
         font-size: 16px;
         color: #ffffff;
@@ -50,6 +50,24 @@
         background: #75ceee;
 
     }
+    .bounce-enter-active {
+        animation: bounce-in .5s;
+    }
+    .bounce-leave-active {
+        animation: bounce-in .5s reverse;
+    }
+    @keyframes bounce-in {
+        0% {
+            transform: scale(0);
+        }
+        50% {
+            transform: scale(1.5);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
 </style>
 <body>
 <div class="manu">
@@ -61,7 +79,12 @@
             <ul>
                 <li v-for="parent in con">
                     <h5 @click="toggle(parent)">{{parent.title}}</h5>
-                    <a href='' v-for="son in parent.son" v-show="parent.state">{{son.title}}</a>
+                    <transition name="bounce">
+                        <div class="con" v-show="parent.state">
+                            <a href='' v-for="son in parent.son">{{son.title}}</a>
+                        </div>
+
+                    </transition>
                 </li>
             </ul>
         `,
